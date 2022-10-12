@@ -1,5 +1,5 @@
-name: "testing action"
-description: "Testing-Prepare npm and install dependencies"
+name: "Testing Action"
+description: "This is a testing compositive action"
 inputs:
   BEANSTALK_APP:  # application name
     description: 'BEANSTALK_APP'
@@ -9,26 +9,20 @@ inputs:
     required: true
     default: 'devops'
 outputs:
-  copied-files: 
-    description: "Number of files copied"
-    value: ${{ steps.testing-action-id.outputs.MY_OUTPUT_VARIABLE }}
+  BEANSTALK_APP: 
+    description: "BEANSTALK_APP"
+    value: ${{ steps.testing-action-id.outputs.BEANSTALK_APP }}
+  BEANSTALK_ENV:
+    description: "BEANSTALK_ENV"
+    value: ${{ steps.testing-action-id.outputs.BEANSTALK_ENV }}
 
 runs:
   using: "composite"
   steps:
-    # - name: Cache npm cache
-    #   uses: actions/cache@v2
-    #   env:
-    #     cache-name: npm-cache
-    #   with:
-    #     path: ~/.npm
-    #     key: ${{ runner.os }}-${{ github.repository }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-    #     restore-keys: |
-    #       ${{ runner.os }}-${{ github.repository }}-${{ env.cache-name }}-
-    #       ${{ runner.os }}-${{ github.repository }}-
     - name: Testing Action
       shell: bash
     - id: testing-action-id
       run: | 
         echo "Testing Action Hello World"
-        echo "::set-output name=MY_OUTPUT_VARIABLE::$(echo $RANDOM)"
+        echo "::set-output name=BEANSTALK_APP::$(echo $BEANSTALK_APP)"
+        echo "::set-output name=BEANSTALK_ENV::$(echo $BEANSTALK_ENV)"
