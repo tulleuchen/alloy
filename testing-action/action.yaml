@@ -19,14 +19,26 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Caller Inputs to Env Var
+      if: github.event_name == 'workflow_dispatch'
+      shell: bash
+      run: | #!/bin/bash  -e
+
+      export SCRIPTS="{PWD:?}/buildscripts"
+      if [[ '${{ toJSON(github.event.inputs) }}' != "null" ]]; then
+        GITHUB_INPUTS='${{ toJSON(github.event.inputs) }}'
+        EXPORT_CMD_GITHUB_INPUTS="$(python3 "${SCRIPTS:?}/context-to-env.py" "${GITHUB_INPUTS}")"
+        eval "${EXPORT_CMD_GITHUB_INPUTS}"
+      fi
+
     - name: Testing Action
       id: testing-action-id
       shell: bash
       run: | 
         # this is for other steps to be able to consume the output. 
         # It doesn't actually print to the log
-        echo "::set-output name=BEANSTALK_APP::$(echo $BEANSTALK_APP)"
-        echo "::set-output name=BEANSTALK_ENV::$(echo $BEANSTALK_ENV)"
+        echo "::set-output name=BEANSTALK_APP::$(echo ${BEANSTALK_APP})"
+        echo "::set-output name=BEANSTALK_ENV::$(echo ${BEANSTALK_ENV})"
 
         # This actually prints to the log
         echo "echo BEANSTALK_APP=${BEANSTALK_APP}"
