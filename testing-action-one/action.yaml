@@ -36,8 +36,8 @@ runs:
       run: | #!/usr/bin/bash -e
         # this is for other steps to be able to consume the output. 
         # It doesn't actually print to the log
-        echo "::set-output name=BEANSTALK_APP::$(echo ${BEANSTALK_APP})"
-        echo "::set-output name=BEANSTALK_ENV::$(echo ${BEANSTALK_ENV})"
+        echo "::set-output name=output_BEANSTALK_APP::$(echo ${BEANSTALK_APP})"
+        echo "::set-output name=output_BEANSTALK_ENV::$(echo ${BEANSTALK_ENV})"
 
         # This actually prints to the log
         echo "echo BEANSTALK_APP=${BEANSTALK_APP}"
