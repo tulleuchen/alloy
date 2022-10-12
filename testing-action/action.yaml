@@ -23,6 +23,11 @@ runs:
       id: testing-action-id
       shell: bash
       run: | 
-        echo "Testing Action Hello World"
+        # this is for other steps to be able to consume the output. 
+        # It doesn't actually print to the log
         echo "::set-output name=BEANSTALK_APP::$(echo $BEANSTALK_APP)"
         echo "::set-output name=BEANSTALK_ENV::$(echo $BEANSTALK_ENV)"
+
+        # This actually prints to the log
+        echo "echo BEANSTALK_APP=${BEANSTALK_APP}"
+        echo "echo BEANSTALK_ENV=${BEANSTALK_ENV}"
