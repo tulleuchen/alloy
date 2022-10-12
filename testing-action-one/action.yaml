@@ -10,11 +10,11 @@ inputs:
     default: 'devops'
 outputs:
   BEANSTALK_APP: 
-    description: "BEANSTALK_APP"
-    value: ${{ steps.testing-action-one-id.outputs.BEANSTALK_APP }}
+    description: "output_BEANSTALK_APP"
+    value: ${{ steps.testing-action-one-id.outputs.output_BEANSTALK_APP }}
   BEANSTALK_ENV:
-    description: "BEANSTALK_ENV"
-    value: ${{ steps.testing-action-one-id.outputs.BEANSTALK_ENV }}
+    description: "output_BEANSTALK_APP"
+    value: ${{ steps.testing-action-one-id.outputs.output_BEANSTALK_ENV }}
 
 runs:
   using: "composite"
@@ -40,5 +40,5 @@ runs:
         echo "::set-output name=output_BEANSTALK_ENV::$(echo ${BEANSTALK_ENV})"
 
         # This actually prints to the log
-        echo "echo BEANSTALK_APP=${BEANSTALK_APP}"
-        echo "echo BEANSTALK_ENV=${BEANSTALK_ENV}"
+        echo "inside action value: BEANSTALK_APP=${BEANSTALK_APP}"
+        echo "inside action value: BEANSTALK_ENV=${BEANSTALK_ENV}"
