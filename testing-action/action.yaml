@@ -20,8 +20,8 @@ runs:
   using: "composite"
   steps:
     - name: Testing Action
+      id: testing-action-id
       shell: bash
-    - id: testing-action-id
       run: | 
         echo "Testing Action Hello World"
         echo "::set-output name=BEANSTALK_APP::$(echo $BEANSTALK_APP)"
