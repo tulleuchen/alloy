@@ -24,6 +24,7 @@ runs:
       shell: bash
       run: | #!/usr/bin/bash -e
         export SCRIPTS="{PWD:?}/buildscripts"
+        find 
         if [[ '${{ toJSON(github.event.inputs) }}' != "null" ]]; then
           GITHUB_INPUTS='${{ toJSON(github.event.inputs) }}'
           EXPORT_CMD_GITHUB_INPUTS="$(python3 "${SCRIPTS:?}/context-to-env.py" "${GITHUB_INPUTS}")"
