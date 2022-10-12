@@ -1,5 +1,5 @@
-name: "Testing Action"
-description: "This is a testing compositive action"
+name: "Testing Action One"
+description: "This is testing a compositive action number one"
 inputs:
   BEANSTALK_APP:  # application name
     description: 'BEANSTALK_APP'
@@ -11,10 +11,10 @@ inputs:
 outputs:
   BEANSTALK_APP: 
     description: "BEANSTALK_APP"
-    value: ${{ steps.testing-action-id.outputs.BEANSTALK_APP }}
+    value: ${{ steps.testing-action-one-id.outputs.BEANSTALK_APP }}
   BEANSTALK_ENV:
     description: "BEANSTALK_ENV"
-    value: ${{ steps.testing-action-id.outputs.BEANSTALK_ENV }}
+    value: ${{ steps.testing-action-one-id.outputs.BEANSTALK_ENV }}
 
 runs:
   using: "composite"
@@ -32,7 +32,7 @@ runs:
         fi
 
     - name: Testing Action
-      id: testing-action-id
+      id: testing-action-one-id
       shell: bash
       run: | #!/usr/bin/bash -e
         # this is for other steps to be able to consume the output. 
